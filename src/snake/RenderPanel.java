@@ -27,7 +27,7 @@ g.setColor(Color.RED);
 		
 		g.fillRect(snake.cherry.x * Snake.SCALE, snake.cherry.y * Snake.SCALE, Snake.SCALE, Snake.SCALE);
 		
-		String string = "Score: " + snake.score + ", Length: " + snake.tailLength + ", Time: " + snake.time / 10;
+		String string = "Score: " + snake.score + ", Length: " + snake.tailLen + ", Time: " + snake.time / 10;
 		
 		g.setColor(Color.white);
 		

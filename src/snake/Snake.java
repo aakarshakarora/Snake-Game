@@ -30,7 +30,7 @@ public class Snake implements ActionListener,KeyListener {
 	
 	public static final int UP = 0, DOWN = 1, LEFT=2, RIGHT = 3, SCALE = 10;
 	
-	public int ticks = 0, direction= DOWN, score, tailLength=10,time;
+	public int tick = 0, dir= DOWN, score, tailLen=10,time;
 	
 	public Point head, cherry;
 	
@@ -58,9 +58,9 @@ public class Snake implements ActionListener,KeyListener {
 		paused = false;
 		time = 0;
 		score = 0;
-		tailLength=10;
-		ticks=0;
-		direction = DOWN;
+		tailLen=10;
+		tick=0;
+		dir = DOWN;
 		head = new Point(0, -1);
 		random = new Random();
 		snakeParts.clear();
@@ -70,14 +70,14 @@ public class Snake implements ActionListener,KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		renderPanel.repaint();
-		ticks++;
-		if (ticks % 2 == 0 && head != null && !over && !paused)
+		tick++;
+		if (tick % 2 == 0 && head != null && !over && !paused)
 		{
 			time++;
 
 			snakeParts.add(new Point(head.x, head.y));
 
-			if (direction == UP)
+			if (dir == UP)
 			{
 				if (head.y - 1 >= 0 && noTailAt(head.x, head.y - 1))
 				{
@@ -90,7 +90,7 @@ public class Snake implements ActionListener,KeyListener {
 				}
 			}
 
-			if (direction == DOWN)
+			if (dir == DOWN)
 			{
 				if (head.y + 1 < 67 && noTailAt(head.x, head.y + 1))
 				{
@@ -102,7 +102,7 @@ public class Snake implements ActionListener,KeyListener {
 				}
 			}
 
-			if (direction == LEFT)
+			if (dir == LEFT)
 			{
 				if (head.x - 1 >= 0 && noTailAt(head.x - 1, head.y))
 				{
@@ -114,7 +114,7 @@ public class Snake implements ActionListener,KeyListener {
 				}
 			}
 
-			if (direction == RIGHT)
+			if (dir == RIGHT)
 			{
 				if (head.x + 1 < 80 && noTailAt(head.x + 1, head.y))
 				{
@@ -126,7 +126,7 @@ public class Snake implements ActionListener,KeyListener {
 				}
 			}
 
-			if (snakeParts.size() > tailLength)
+			if (snakeParts.size() > tailLen)
 			{
 				snakeParts.remove(0);
 
@@ -135,7 +135,7 @@ public class Snake implements ActionListener,KeyListener {
 			if(cherry != null) {
 				if(head.equals(cherry)) {
 					score += 10;
-					tailLength++;
+					tailLen++;
 					cherry.setLocation(random.nextInt(79), random.nextInt(66));
 				}
 			}
@@ -162,24 +162,24 @@ public class Snake implements ActionListener,KeyListener {
 	{
 		int i = e.getKeyCode();
 
-		if ((i == KeyEvent.VK_A || i == KeyEvent.VK_LEFT) && direction != RIGHT)
+		if ((i == KeyEvent.VK_A || i == KeyEvent.VK_LEFT) && dir != RIGHT)
 		{
-			direction = LEFT;
+			dir = LEFT;
 		}
 
-		if ((i == KeyEvent.VK_D || i == KeyEvent.VK_RIGHT) && direction != LEFT)
+		if ((i == KeyEvent.VK_D || i == KeyEvent.VK_RIGHT) && dir != LEFT)
 		{
-			direction = RIGHT;
+			dir = RIGHT;
 		}
 
-		if ((i == KeyEvent.VK_W || i == KeyEvent.VK_UP) && direction != DOWN)
+		if ((i == KeyEvent.VK_W || i == KeyEvent.VK_UP) && dir != DOWN)
 		{
-			direction = UP;
+			dir = UP;
 		}
 
-		if ((i == KeyEvent.VK_S || i == KeyEvent.VK_DOWN) && direction != UP)
+		if ((i == KeyEvent.VK_S || i == KeyEvent.VK_DOWN) && dir != UP)
 		{
-			direction = DOWN;
+			dir = DOWN;
 		}
 
 		if (i == KeyEvent.VK_SPACE)
